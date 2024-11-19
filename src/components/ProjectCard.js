@@ -1,31 +1,44 @@
-import { useState } from "react";
-
-const ProjectCard = (props) => {
+const ProjectCard = ({
+  name,
+  pic,
+  demo,
+  description,
+  code,
+  projType,
+  tech,
+}) => {
+  const openInNewTab = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
-    <div class="card"> 
+    <div class="card">
       <ul class="ul">
-        <li>
+        <li
+          className={demo ? "ul-li-first-child" : "rounded-[6px]"}
+          onClick={() => openInNewTab(code)}
+        >
           View Code
         </li>
-        <li>
-          Live Demo
-        </li>
+        {demo && (
+          <li className="ul-li-last-child" onClick={() => openInNewTab(demo)}>
+            Live Demo
+          </li>
+        )}
       </ul>
-      <div className="rounded-[15px]">
-        <img className="object-cover" src={props.pic} alt="No pic"/> 
-      </div>
+      <img className="object-cover rounded-[15px]" src={pic} alt="No pic" />
       <div class="con-text">
-        <h2 className="">
-          {props.name} 
-        </h2>
+        <h2 className="">{name}</h2>
         <p>
-          Paris, the capital of France, is a major European city and a world center for gastronomy and culture. Its 19th century urban landscape is intersected by wide boulevards and the River Seine.
+          • {projType}
+          <br />• {tech}
+          <br />
+          {description}
           {/* <button>See more</button> */}
         </p>
-      </div> 
+      </div>
     </div>
-    )
-}
+  );
+};
 
 export default ProjectCard;
